@@ -1,0 +1,35 @@
+html , body { 
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.container-fluid {
+    padding: 0;
+    height: calc(100% - 76px);
+    width: 100vw;
+}
+
+
+.row { 
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.navbar-brand { 
+    font-size: clamp(15px , 2vw , 45px);
+    /* margin-left: 15px; */
+    /* padding-top: 14px; */
+}
+
+#mapContainer { 
+    
+}
+#dreamsContainer { 
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#map { 
+    height: calc(100vh - 76px);
+    width: 100%;
+}
