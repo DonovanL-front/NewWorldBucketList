@@ -1,0 +1,24 @@
+{
+  "name": "newworldbucketlist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DonovanL-front/NewWorldBucketList.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DonovanL-front/NewWorldBucketList/issues"
+  },
+  "homepage": "https://github.com/DonovanL-front/NewWorldBucketList#readme",
+  "devDependencies": {
+    "mini-css-extract-plugin": "^2.3.0",
+    "webpack": "^5.56.1",
+    "webpack-dev-server": "^4.3.1"
+  }
+}
