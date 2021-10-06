@@ -8,7 +8,7 @@ html, body {
     height: 100%;
     width: 100%;
     font-family: 'Open Sans' , sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .container-fluid { 
@@ -42,9 +42,10 @@ nav {
 #map { 
     height:100%;
     
+    
 }
 
-#dreams-container { 
+#dreamsContainer { 
     overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
@@ -52,10 +53,10 @@ nav {
 
 }
 
-#map-container { 
+#mapContainer { 
     height: 100%;
-    width: 100%;
     overflow: hidden;
+    position: relative;
 }
 
 .card {
@@ -65,7 +66,8 @@ nav {
 }
 
 .card-body { 
-    padding: 0;
+    padding: 25px auto;
+
 }
 
 .card-header { 
@@ -73,22 +75,29 @@ nav {
     padding: 15px 0
 }
 
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 5px;
+}
+
 
 .btn-block { 
-    width: 90%;
-    margin: 15px auto;
+    width: 100%;
+    padding : 1% 55px;
 }
 
-.btn-sm:first-child { 
-    margin-left: 30%;
+.btn-sm { 
+    margin-left: 5px;
 }
 
 
 
-#resetMap { 
+#reset{ 
     position: absolute;
     z-index: 10;
-    left: calc(50% - 75px);
-    top: 10px;
+    left:calc(50% - 76px);
+    top: 1%;
     width: 150px;
 }
