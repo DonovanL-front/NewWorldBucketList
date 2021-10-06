@@ -2,6 +2,60 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/data.js":
+/*!*********************!*\
+  !*** ./src/data.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "data": () => (/* binding */ data)
+/* harmony export */ });
+const data = [ 
+    {
+        id: 1,
+        description: "Empire State Building" , 
+        done: false,
+        link: "https://www.esbnyc.com/",
+        imagePath: "./img/empire-state-building.jpg",
+        coordinates: {
+            lat : 40.748635550585625,
+            lng : -73.98575023184247
+        }
+    },
+
+    {
+        id: 2 , 
+        description: "Aurores boréales en Islande",
+        done: false,
+        link: "https://www.scanditours.fr/inspirations/aurores-boreales-islande/",
+        imagePath: "./img/boreales.jpg",
+        coordinates: {
+            lat: 63.983, 
+            lng: -19.067
+        }
+
+    },
+    {
+        id: 3,
+        description: "Grand Canyon", 
+        done: false, 
+        link: "https://www.nps.gov/grca/index.html",
+        imagePath: "./img/horseshoe.jpg",
+        coordinates: {
+            lat: 36.0544445, 
+            lng: -112.1401108
+        }
+
+    },
+    
+]
+
+
+
+/***/ }),
+
 /***/ "./src/map.js":
 /*!********************!*\
   !*** ./src/map.js ***!
@@ -12,14 +66,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "initMap": () => (/* binding */ initMap)
 /* harmony export */ });
+/* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data */ "./src/data.js");
+ 
+
+
 let map;
 
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
+    center: { lat : 40.748635550585625, lng: -73.98575023184247 },
     zoom: 8,
+    mapTypeId: 'roadmap'
   });
+
+  const marker = new google.maps.Marker({
+    position: { lat : 40.748635550585625, lng: -73.98575023184247 }, 
+    map: map, 
+    icon : dream.done ? './img/marker.jpg' : './img/marker_done.jpg'
+  })
 }
+
+
+
 
 
 

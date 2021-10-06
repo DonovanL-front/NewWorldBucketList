@@ -1,35 +1,94 @@
-html , body { 
-    height: 100vh;
+* { 
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Open Sans' , sans-serif;
     overflow: hidden;
 }
 
-.container-fluid {
+.container-fluid { 
     padding: 0;
     height: calc(100% - 76px);
     width: 100vw;
-}
 
+}
 
 .row { 
     height: 100%;
-    overflow-y: hidden;
+    overflow-y:hidden;
 }
+
 
 .navbar-brand { 
-    font-size: clamp(15px , 2vw , 45px);
-    /* margin-left: 15px; */
-    /* padding-top: 14px; */
-}
-
-#mapContainer { 
+    font-family: 'Open Sans' , sans-serif;
+    font-weight: 600;
+    font-size: calc(1.2vw + 10px);
+    padding-left: 15px;
     
 }
-#dreamsContainer { 
+
+nav { 
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+
+#map { 
+    height:100%;
+    
+}
+
+#dreams-container { 
     overflow-y: auto;
     overflow-x: hidden;
+    height: 100%;
+    background: #eee;
+
 }
-#map { 
-    height: calc(100vh - 76px);
+
+#map-container { 
+    height: 100%;
     width: 100%;
+    overflow: hidden;
+}
+
+.card {
+    font-size: calc(1vw + 15px);
+    font-weight: 600;
+    margin: 20px;
+}
+
+.card-body { 
+    padding: 0;
+}
+
+.card-header { 
+    font-family: 'Open Sans', sans-serif;
+    padding: 15px 0
+}
+
+
+.btn-block { 
+    width: 90%;
+    margin: 15px auto;
+}
+
+.btn-sm:first-child { 
+    margin-left: 30%;
+}
+
+
+
+#resetMap { 
+    position: absolute;
+    z-index: 10;
+    left: calc(50% - 75px);
+    top: 10px;
+    width: 150px;
 }
