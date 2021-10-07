@@ -6,4 +6,4 @@
 
 #Petite interface pour visiter les coordonnées sélectionnées sur maps grace a streetView
 
-#Posibilité de changer d'une map et streetView
+#Posibilité de passer de google maps a google streetView en cliquant sur visiter 
