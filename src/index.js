@@ -4,7 +4,7 @@ import { buildAllDreams } from './dreams'
 
 window.init = init
 function init() { 
-    initMap()
+    initMap();
     buildAllDreams();
 }
 

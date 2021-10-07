@@ -18,8 +18,7 @@ const data = [
         link: "https://www.scanditours.fr/inspirations/aurores-boreales-islande/",
         imagePath: "./img/boreales.jpg",
         coordinates: {
-            lat: 63.983, 
-            lng: -19.067
+            lat: 65.68285974629876, lng: -17.550220712692955
         }
 
     },
@@ -42,8 +41,7 @@ const data = [
         link: "https://www.nps.gov/yell/index.htm",
         imagePath : "./img/Yellowstone.jpg", 
         coordinates: {
-            lat: 44.4183062909995005,
-            lng: -110.57198100092277722
+           lat: 44.41693502270156, lng: -110.57205139889487
         }
     }
     

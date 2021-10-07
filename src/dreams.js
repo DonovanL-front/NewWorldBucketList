@@ -11,20 +11,18 @@ function buildAllDreams() {
     
     data.forEach(buildOneDream)
     addDreamsListener()
-
-
 }
 
 function buildOneDream(dream) { 
     let dreamElement = document.createElement('div')
     dreamElement.innerHTML = `
-    <div class="card text-center">
+    <div class="card text-center" id="${dream.id}">
             <h4 class="card-header">
                  ${dream.description}
             </h4>
             <img src="${dream.imagePath}" alt="|||||||">
         <div class="card-body">
-            <a href="#" type="button" class="btn btn-${dream.done ? "secondary" : "danger"} btn-block">${dream.done? "Je veux le refaire !" : "Je me lance"}</a>
+            <a href="#" type="button" class="btn action btn-${dream.done ? "secondary" : "danger"} btn-block">${dream.done? "Je veux le refaire !" : "Je me lance"}</a>
         </div>
         <div class="card-footer text-muted text-right ">
                 <a href="#" class="btn visit btn-outline-secondary btn-sm">Visiter</a> 
@@ -37,17 +35,32 @@ function buildOneDream(dream) {
 }
 
 function addDreamsListener() { 
-    document.querySelectorAll('.visit').forEach(el => { 
-        el.addEventListener('click', event => {
-            visitDream(el.parentElement.parentElement.getAttribute('id'));
+    document.querySelectorAll('.visit').forEach(item => { 
+        item.addEventListener('click', event => {
+            visitDream(item.parentElement.parentElement.getAttribute('id'));
+        })
+    });
+
+    document.querySelectorAll('.action').forEach(item => { 
+        item.addEventListener('click', event => {
+            toggleDreamDone(item.parentElement.parentElement.getAttribute('id'));
+            buildAllDreams()
         })
     });
 } 
 
 function visitDream(dreamId) { 
     let position = data.filter(item => item.id == dreamId)[0].coordinates;
-    // visitDreamOnMap(position)
+    visitDreamOnMap(position)
 }
+
+function toggleDreamDone(dreamId) { 
+    let dream = data.filter(item => item.id == dreamId)[0];
+    dream.done = !dream.done
+}
+
+
+
 
 
 export {buildAllDreams}

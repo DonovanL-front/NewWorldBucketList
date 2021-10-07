@@ -32,8 +32,7 @@ const data = [
         link: "https://www.scanditours.fr/inspirations/aurores-boreales-islande/",
         imagePath: "./img/boreales.jpg",
         coordinates: {
-            lat: 63.983, 
-            lng: -19.067
+            lat: 65.68285974629876, lng: -17.550220712692955
         }
 
     },
@@ -56,8 +55,7 @@ const data = [
         link: "https://www.nps.gov/yell/index.htm",
         imagePath : "./img/Yellowstone.jpg", 
         coordinates: {
-            lat: 44.4183062909995005,
-            lng: -110.57198100092277722
+           lat: 44.41693502270156, lng: -110.57205139889487
         }
     }
     
@@ -92,20 +90,18 @@ function buildAllDreams() {
     
     _data__WEBPACK_IMPORTED_MODULE_0__.data.forEach(buildOneDream)
     addDreamsListener()
-
-
 }
 
 function buildOneDream(dream) { 
     let dreamElement = document.createElement('div')
     dreamElement.innerHTML = `
-    <div class="card text-center">
+    <div class="card text-center" id="${dream.id}">
             <h4 class="card-header">
                  ${dream.description}
             </h4>
             <img src="${dream.imagePath}" alt="|||||||">
         <div class="card-body">
-            <a href="#" type="button" class="btn btn-${dream.done ? "secondary" : "danger"} btn-block">${dream.done? "Je veux le refaire !" : "Je me lance"}</a>
+            <a href="#" type="button" class="btn action btn-${dream.done ? "secondary" : "danger"} btn-block">${dream.done? "Je veux le refaire !" : "Je me lance"}</a>
         </div>
         <div class="card-footer text-muted text-right ">
                 <a href="#" class="btn visit btn-outline-secondary btn-sm">Visiter</a> 
@@ -118,17 +114,32 @@ function buildOneDream(dream) {
 }
 
 function addDreamsListener() { 
-    document.querySelectorAll('.visit').forEach(el => { 
-        el.addEventListener('click', event => {
-            visitDream(el.parentElement.parentElement.getAttribute('id'));
+    document.querySelectorAll('.visit').forEach(item => { 
+        item.addEventListener('click', event => {
+            visitDream(item.parentElement.parentElement.getAttribute('id'));
+        })
+    });
+
+    document.querySelectorAll('.action').forEach(item => { 
+        item.addEventListener('click', event => {
+            toggleDreamDone(item.parentElement.parentElement.getAttribute('id'));
+            buildAllDreams()
         })
     });
 } 
 
 function visitDream(dreamId) { 
     let position = _data__WEBPACK_IMPORTED_MODULE_0__.data.filter(item => item.id == dreamId)[0].coordinates;
-    // visitDreamOnMap(position)
+    (0,_map__WEBPACK_IMPORTED_MODULE_1__.visitDreamOnMap)(position)
 }
+
+function toggleDreamDone(dreamId) { 
+    let dream = _data__WEBPACK_IMPORTED_MODULE_0__.data.filter(item => item.id == dreamId)[0];
+    dream.done = !dream.done
+}
+
+
+
 
 
 
@@ -146,54 +157,87 @@ function visitDream(dreamId) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "initMap": () => (/* binding */ initMap),
-/* harmony export */   "addMarkerOnMap": () => (/* binding */ addMarkerOnMap)
+/* harmony export */   "addMarkerOnMap": () => (/* binding */ addMarkerOnMap),
+/* harmony export */   "visitDreamOnMap": () => (/* binding */ visitDreamOnMap)
 /* harmony export */ });
 /* harmony import */ var _data__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data */ "./src/data.js");
- 
 
 
 let map;
+let panorama;
+let panoramaElement = document.querySelector('#panorama');
+let resetMapBtn = document.getElementById("reset");
+let backToMapBtn = document.getElementById("backToMap");
 
-let resetMapBtn = document.getElementById('reset')
+
 function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat : 40.748635550585625, lng: -73.98575023184247 },
-    zoom: 8,
-    mapTypeId: 'roadmap'
-  }); 
-  addMapListener()
+    center: { lat: 40.748635550585625, lng: -73.98575023184247 },
+    zoom: 3,
+    mapTypeId: "roadmap",
+    streetViewControl: false,
+  });
+
+  panorama = new google.maps.StreetViewPanorama
+  (document.getElementById("panorama"), {
+      position: {lat: 44.4183062909995005,
+        lng: -110.57198100092277722},
+      pov: {
+        heading: 34,
+        pitch: 10,
+      },
+    }
+  )
+  addMapListener();
+  panoramaElement.style.display = 'none';
+  backToMapBtn.style.display = 'none';
+
 }
 
 function addMarkerOnMap(dream) {
   const marker = new google.maps.Marker({
-    position: dream.coordinates, 
-    map: map, 
-    icon : dream.done ?"./img/marker_done.png" : "./img/marker.png"
-  })
-
-  marker.addListener("click", () => { 
-    zoomOn(marker.getPosition())
+    position: dream.coordinates,
+    map: map,
+    icon: dream.done ? "./img/marker_done.png" : "./img/marker.png",
   });
+
+  marker.addListener("click", () => {
+    zoomOn(marker.getPosition());
+  });
+
+
 }
 
-
-function zoomOn(position) { 
+function zoomOn(position) {
   map.setZoom(18);
   map.setCenter(position);
-  map.setMapTypeId("satellite")
+  map.setMapTypeId("satellite");
 }
 
 function addMapListener() {
-  resetMapBtn.addEventListener('click', resetMap)
+  resetMapBtn.addEventListener("click", resetMap);
+  backToMapBtn.addEventListener("click", backToMap);
 }
 
-
-function resetMap() { 
+function resetMap() {
   map.setZoom(3);
-  map.setCenter({ lat: 48.858159, lng: 2.294497});
-  map.setMapTypeId("roadmap")
+  map.setCenter({ lat: 48.858159, lng: 2.294497 });
+  map.setMapTypeId("roadmap");
 }
 
+function backToMap() { 
+  panoramaElement.style.display = 'none'
+  backToMapBtn.style.display = 'none'
+  resetMapBtn.style.display = 'block'
+}
+
+
+function visitDreamOnMap(position) { 
+  panorama.setPosition(position)
+  panoramaElement.style.display = 'block'
+  backToMapBtn.style.display = 'block';
+  resetMapBtn.style.display = "none"
+}
 
 
 
@@ -273,8 +317,8 @@ __webpack_require__.r(__webpack_exports__);
 
 window.init = init
 function init() { 
-    ;(0,_map__WEBPACK_IMPORTED_MODULE_0__.initMap)()
-    ;(0,_dreams__WEBPACK_IMPORTED_MODULE_1__.buildAllDreams)();
+    ;(0,_map__WEBPACK_IMPORTED_MODULE_0__.initMap)();
+    (0,_dreams__WEBPACK_IMPORTED_MODULE_1__.buildAllDreams)();
 }
 
 init()

@@ -39,8 +39,14 @@ nav {
 }
 
 
-#map { 
+#map , #panorama { 
     height:100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
     
     
 }
@@ -94,10 +100,11 @@ nav {
 
 
 
-#reset{ 
+#reset, #backToMap{ 
     position: absolute;
     z-index: 10;
     left:calc(50% - 76px);
     top: 1%;
     width: 150px;
 }
+
